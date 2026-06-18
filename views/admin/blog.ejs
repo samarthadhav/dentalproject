@@ -1,0 +1,53 @@
+<%- include('header.ejs');%>
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Starter</p>
+                <h1 class="h3 mb-1">Blog</h1>
+              </div>
+            </div>
+          </div>
+          <section class="panel mb-3">
+                <form action="/admin/blog_save" method="post" enctype="multipart/form-data">
+                    <label>Photo</label>
+                    <input type="file"  name="bphoto" class="form-control mb-3"/>
+                    <label>Date</label>
+                    <input type="date"  name="bdate" class="form-control mb-3"/>
+                    <label>Title</label>
+                    <input type="text"  name="btitle" class="form-control mb-3"/>
+                    <label>Description</label>
+                    <textarea class="form-control mb-3" name="bdescription" ></textarea>
+                    <button class="btn btn-danger">Save</button>
+                </form>
+                <table class="table table-border mt-5">
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Image</th>
+                        <th>date</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                    <% for(var i=0;i<data.length;i++){%>
+                        <tr>
+                            <th><%=i+1%></th>
+                            <th>
+                                <img src="/images/<%=data[i].bphoto%>" height="100"/>
+                            </th>
+                            <th><%=data[i].bdate%></th>
+                            <th><%=data[i].btitle%></th>
+                            <th><%=data[i].bdescription%></th>
+                            <th>
+                                <a href="/admin/blog_edit/<%=data[i].bid%>"><button class="btn btn-danger">Edit</button></a>
+                                <a href="/admin/blog_delete/<%=data[i].bid%>/<%=data[i].bphoto%>"><button class="btn btn-primary">Delete</button></a>
+                            </th>
+                        </tr>
+                        <%}%>
+                </table>
+          </section>
+        </div>
+      </main>
+<%- include('footer.ejs');%>

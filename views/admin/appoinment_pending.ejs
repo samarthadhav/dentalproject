@@ -1,0 +1,45 @@
+<%- include('header.ejs');%>
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Starter</p>
+                <h1 class="h3 mb-1"> Pending Appoinment</h1>
+              </div>
+            </div>
+          </div>
+          <section class="panel mb-3">
+
+                <table class="table table-border mt-5">
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Service Id</th>
+                        <th>Appoinment Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    <% for(var i=0;i<data.length;i++){%>
+                        <tr>
+                            <th><%=i+1%></th>
+                            <th><%=data[i].name%></th>
+                            <th><%=data[i].email%></th>
+                            <th><%=data[i].service_id%></th>
+                            <th><%= new Date(data[i].appoinment_date).toLocaleDateString('en-GB').replace(/\//g, '-') %></th>
+                            <th><%=data[i].status%></th>
+
+                            <th>
+                                <a href="/admin/app_conf/<%=data[i].aid%>"><button class="btn btn-danger">Confirm</button></a>
+                                <a href="/admin/app_rej/<%=data[i].aid%>"><button class="btn btn-primary">Reject</button></a>
+                            </th>
+                        </tr>
+                        <%}%>
+                </table>
+          </section>
+        </div>
+      </main>
+<%- include('footer.ejs');%>
